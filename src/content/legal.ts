@@ -20,7 +20,8 @@ export const PRIVACY_CONTENT = `We do not save your data.
 
 • Prompts you paste are compressed entirely in your browser. They are not sent to our servers for compression.
 • Uploaded files are read once to extract text, then discarded. We do not store file contents, filenames, or extracted text.
-• We do not use cookies, analytics trackers, or third-party advertising on this application.
+• We do not use cookies or third-party advertising on this application.
+• We use Vercel Analytics for anonymous page-view statistics only. It does not receive your prompts, uploads, or compressed output.
 • We do not build user profiles or maintain databases of your inputs or outputs.
 
 Server logs

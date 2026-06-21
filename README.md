@@ -43,7 +43,7 @@ Paste prose, upload a file, pick Markdown / JSON / YAML / shorthand, and get mea
 | **Two modes** | Lossless (structure only) or Aggressive (stopwords, lemmatization, filler removal) |
 | **File upload** | Import `.txt`, `.pdf`, `.doc`, `.docx` — text extracted, not stored |
 | **Legend builder** | Short keys + decoder block when abbreviations actually save tokens |
-| **Privacy-first** | Prompts are not saved on our servers |
+| **Privacy-first** | Prompts are not saved; anonymous page analytics via Vercel Analytics |
 
 ---
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import CompressButton from "./components/CompressButton";
 import FileUpload from "./components/FileUpload";
 import FormatPicker from "./components/FormatPicker";
@@ -136,6 +137,7 @@ export default function App() {
 
         <SiteFooter />
       </div>
+      <Analytics />
     </div>
   );
 }
