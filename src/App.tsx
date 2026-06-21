@@ -5,9 +5,9 @@ import ModeToggle from "./components/ModeToggle";
 import PromptEditor from "./components/PromptEditor";
 import ResultsPanel from "./components/ResultsPanel";
 import { useDebouncedValue } from "./hooks/useDebouncedValue";
+import { useTokenCount } from "./hooks/useTokenCount";
 import { compressPrompt } from "./lib/api";
 import { analyzePrompt } from "./lib/index";
-import { useTokenCount } from "./hooks/useTokenCount";
 import type { CompressResponse, Format, Mode } from "@shared/types";
 import "./styles/index.css";
 
@@ -56,61 +56,82 @@ export default function App() {
   };
 
   return (
-    <div className="app">
-      <header className="header">
-        <div className="header__brand">
-          <p className="header__kicker">Token-aware compressor</p>
-          <h1 className="header__title">PromptPack</h1>
-        </div>
-        <nav className="header__nav">
-          <a href="https://yasirali.io" target="_blank" rel="noopener noreferrer">
-            yasirali.io
-          </a>
-          <a
-            href="https://github.com/yasirali646/promptpack"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
-          </a>
-        </nav>
-      </header>
+    <div className="shell">
+      <div className="grain" aria-hidden="true" />
 
-      <p className="tagline">
-        Paste a verbose prompt, pick a format, get a shorter version with measured token savings.
-      </p>
+      <aside className="rail" aria-hidden="true">
+        <span className="rail__text">vol. 01 · token reduction bureau</span>
+      </aside>
 
-      <main className="layout">
-        <div className="layout__left">
-          <PromptEditor
-            value={text}
-            onChange={setText}
-            tokenCount={tokenCount}
-            hints={hints}
-          />
-          <FormatPicker value={format} onChange={setFormat} />
-          <ModeToggle value={mode} onChange={setMode} />
-          <CompressButton
-            onClick={handleCompress}
-            loading={loading}
-            disabled={!text.trim()}
-          />
-        </div>
-        <div className="layout__right">
-          <ResultsPanel
-            result={result}
-            originalText={text}
-            loading={loading}
-            error={error}
-          />
-        </div>
-      </main>
+      <div className="app">
+        <header className="masthead">
+          <div className="masthead__main">
+            <p className="masthead__issue">Est. 2026 · Open utility</p>
+            <h1 className="masthead__title">
+              Prompt<span className="masthead__title-accent">Pack</span>
+            </h1>
+            <p className="masthead__lede">
+              Same instructions, fewer tokens. Paste prose, receive a tightened manuscript
+              in Markdown, JSON, YAML, or shorthand — with a legend the model can read.
+            </p>
+          </div>
+          <div className="masthead__aside">
+            <div className="stamp stamp--live">
+              <span className="stamp__label">Status</span>
+              <span className="stamp__value">Ready</span>
+            </div>
+            <nav className="masthead__nav">
+              <a href="https://yasirali.io" target="_blank" rel="noopener noreferrer">
+                Yasir Ali
+              </a>
+              <span className="masthead__sep" aria-hidden="true">/</span>
+              <a
+                href="https://github.com/yasirali646/promptpack"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Source
+              </a>
+            </nav>
+          </div>
+        </header>
 
-      <footer className="footer">
-        <p>
-          Counts use cl100k_base (GPT-4 / 4o family). Server rate limit: 10 compressions / hour / IP.
-        </p>
-      </footer>
+        <main className="workspace">
+          <section className="workspace__source" aria-label="Source prompt">
+            <PromptEditor
+              value={text}
+              onChange={setText}
+              tokenCount={tokenCount}
+              hints={hints}
+            />
+            <div className="controls">
+              <FormatPicker value={format} onChange={setFormat} />
+              <ModeToggle value={mode} onChange={setMode} />
+              <CompressButton
+                onClick={handleCompress}
+                loading={loading}
+                disabled={!text.trim()}
+              />
+            </div>
+          </section>
+
+          <section className="workspace__yield" aria-label="Compressed output">
+            <ResultsPanel
+              result={result}
+              originalText={text}
+              loading={loading}
+              error={error}
+            />
+          </section>
+        </main>
+
+        <footer className="colophon">
+          <p>
+            Token counts use <code>cl100k_base</code> (GPT-4 / 4o family).
+            Rate limit: 10 compressions per hour per visitor.
+          </p>
+        </footer>
+      </div>
     </div>
   );
 }

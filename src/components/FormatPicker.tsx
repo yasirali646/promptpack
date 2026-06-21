@@ -1,10 +1,10 @@
 import type { Format } from "@shared/types";
 
 const FORMATS: { id: Format; label: string; hint: string }[] = [
-  { id: "markdown", label: "Markdown", hint: "Best for readable rules and tables" },
-  { id: "json", label: "JSON", hint: "Best for nested config and tool schemas" },
-  { id: "yaml", label: "YAML", hint: "Compact nested structure" },
-  { id: "minified", label: "Minified", hint: "Dense plain-text abbreviations" },
+  { id: "markdown", label: "Markdown", hint: "Rules & tables" },
+  { id: "json", label: "JSON", hint: "Nested config" },
+  { id: "yaml", label: "YAML", hint: "Compact tree" },
+  { id: "minified", label: "Shorthand", hint: "Dense prose" },
 ];
 
 interface FormatPickerProps {
@@ -14,11 +14,11 @@ interface FormatPickerProps {
 
 export default function FormatPicker({ value, onChange }: FormatPickerProps) {
   return (
-    <fieldset className="picker">
-      <legend className="picker__legend">Output format</legend>
-      <div className="picker__grid">
+    <fieldset className="control-block">
+      <legend className="control-block__legend">Output format</legend>
+      <div className="format-row">
         {FORMATS.map((f) => (
-          <label key={f.id} className={`picker__option${value === f.id ? " is-active" : ""}`}>
+          <label key={f.id} className={`format-chip${value === f.id ? " is-active" : ""}`}>
             <input
               type="radio"
               name="format"
@@ -26,8 +26,8 @@ export default function FormatPicker({ value, onChange }: FormatPickerProps) {
               checked={value === f.id}
               onChange={() => onChange(f.id)}
             />
-            <span className="picker__label">{f.label}</span>
-            <span className="picker__hint">{f.hint}</span>
+            <span className="format-chip__label">{f.label}</span>
+            <span className="format-chip__hint">{f.hint}</span>
           </label>
         ))}
       </div>

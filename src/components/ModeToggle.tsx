@@ -7,24 +7,24 @@ interface ModeToggleProps {
 
 export default function ModeToggle({ value, onChange }: ModeToggleProps) {
   return (
-    <fieldset className="mode">
-      <legend className="picker__legend">Compression mode</legend>
-      <div className="mode__toggle">
+    <fieldset className="control-block">
+      <legend className="control-block__legend">Compression mode</legend>
+      <div className="mode-row">
         <button
           type="button"
-          className={`mode__btn${value === "lossless" ? " is-active" : ""}`}
+          className={`mode-seg${value === "lossless" ? " is-active" : ""}`}
           onClick={() => onChange("lossless")}
         >
-          Lossless
-          <span>Keep every constraint</span>
+          <span className="mode-seg__title">Lossless</span>
+          <span className="mode-seg__desc">Every constraint kept</span>
         </button>
         <button
           type="button"
-          className={`mode__btn${value === "aggressive" ? " is-active" : ""}`}
+          className={`mode-seg${value === "aggressive" ? " is-active" : ""}`}
           onClick={() => onChange("aggressive")}
         >
-          Aggressive
-          <span>Trim redundancy</span>
+          <span className="mode-seg__title">Aggressive</span>
+          <span className="mode-seg__desc">Trim redundancy</span>
         </button>
       </div>
     </fieldset>

@@ -8,11 +8,14 @@ export default function CompressButton({ onClick, loading, disabled }: CompressB
   return (
     <button
       type="button"
-      className="compress-btn"
+      className="press-btn"
       onClick={onClick}
       disabled={disabled || loading}
     >
-      {loading ? "Compressing…" : "Compress prompt"}
+      <span className="press-btn__label">
+        {loading ? "Composing…" : "Run compression"}
+      </span>
+      {!loading && <span className="press-btn__mark" aria-hidden="true">→</span>}
     </button>
   );
 }
