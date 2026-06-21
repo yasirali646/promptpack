@@ -1,7 +1,6 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
+import type { Request, Response } from "express";
 
-export default function handler(_req: VercelRequest, res: VercelResponse) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+export default function handler(_req: Request, res: Response) {
   return res.status(200).json({
     ok: true,
     service: "promptpack",

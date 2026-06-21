@@ -1,9 +1,11 @@
 import { useState } from "react";
 import CompressButton from "./components/CompressButton";
+import FileUpload from "./components/FileUpload";
 import FormatPicker from "./components/FormatPicker";
 import ModeToggle from "./components/ModeToggle";
 import PromptEditor from "./components/PromptEditor";
 import ResultsPanel from "./components/ResultsPanel";
+import SiteFooter from "./components/SiteFooter";
 import { useDebouncedValue } from "./hooks/useDebouncedValue";
 import { useTokenCount } from "./hooks/useTokenCount";
 import { compressPrompt } from "./lib/api";
@@ -40,12 +42,18 @@ export default function App() {
   const tokenCount = useTokenCount(text, debouncedText);
   const hints = analyzePrompt(debouncedText);
 
-  const handleCompress = async () => {
+  const handleClear = () => {
+    setText("");
+    setResult(null);
+    setError(null);
+  };
+
+  const handleCompress = () => {
     if (!text.trim()) return;
     setLoading(true);
     setError(null);
     try {
-      const res = await compressPrompt({ text, format, mode, includeLegendInCount: true });
+      const res = compressPrompt({ text, format, mode, includeLegendInCount: true });
       setResult(res);
     } catch (err) {
       setResult(null);
@@ -71,8 +79,8 @@ export default function App() {
               Prompt<span className="masthead__title-accent">Pack</span>
             </h1>
             <p className="masthead__lede">
-              Same instructions, fewer tokens. Paste prose, receive a tightened manuscript
-              in Markdown, JSON, YAML, or shorthand — with a legend the model can read.
+              Same instructions, fewer tokens. Paste prose or upload a .txt, .pdf, or .doc file,
+              then receive a tightened manuscript in Markdown, JSON, YAML, or shorthand.
             </p>
           </div>
           <div className="masthead__aside">
@@ -104,6 +112,7 @@ export default function App() {
               tokenCount={tokenCount}
               hints={hints}
             />
+            <FileUpload onLoad={setText} onClear={handleClear} canClear={!!text.trim()} />
             <div className="controls">
               <FormatPicker value={format} onChange={setFormat} />
               <ModeToggle value={mode} onChange={setMode} />
@@ -125,12 +134,7 @@ export default function App() {
           </section>
         </main>
 
-        <footer className="colophon">
-          <p>
-            Token counts use <code>cl100k_base</code> (GPT-4 / 4o family).
-            Rate limit: 10 compressions per hour per visitor.
-          </p>
-        </footer>
+        <SiteFooter />
       </div>
     </div>
   );

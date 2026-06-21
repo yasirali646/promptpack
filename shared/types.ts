@@ -10,6 +10,8 @@ export interface CompressRequest {
 
 export interface CompressResponse {
   originalTokens: number;
+  bodyTokens: number;
+  legendTokens: number;
   compressedTokens: number;
   savedPercent: number;
   compressed: string;
@@ -25,12 +27,4 @@ export interface HeuristicHint {
   type: "duplicate" | "filler" | "whitespace" | "list";
   message: string;
   count?: number;
-}
-
-export interface LlmCompressResult {
-  compressed: string;
-  legend: Record<string, string>;
-  format: Format;
-  mode: Mode;
-  notes: string[];
 }

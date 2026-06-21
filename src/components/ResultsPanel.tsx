@@ -40,14 +40,20 @@ export default function ResultsPanel({
               <span className="metric__val">
                 {result.savedPercent > 0 ? `−${result.savedPercent}%` : "—"}
               </span>
-              <span className="metric__lbl">saved</span>
+              <span className="metric__lbl">body saved</span>
             </div>
             <div className="metric metric--muted">
               <span className="metric__val">
-                {result.originalTokens}→{result.compressedTokens}
+                {result.originalTokens}→{result.bodyTokens}
               </span>
-              <span className="metric__lbl">tokens</span>
+              <span className="metric__lbl">body tokens</span>
             </div>
+            {result.legendTokens > 0 && (
+              <div className="metric metric--muted">
+                <span className="metric__val">+{result.legendTokens}</span>
+                <span className="metric__lbl">legend</span>
+              </div>
+            )}
           </div>
         )}
       </header>
